@@ -135,12 +135,8 @@ deny contains result if {
 #   solution: >-
 #     Update the input snapshot replacing the unpinned image reference with pinned image
 #     reference. Pinned image reference contains the image digest.
-#   collections:
-#   - redhat
-#   effective_on: 2024-08-15T00:00:00Z
 #
 deny contains result if {
-	_release_restrictions_apply
 
 	input_image = image.parse(input.image.ref)
 	components := input.snapshot.components
@@ -163,10 +159,8 @@ deny contains result if {
 #     Ensure all images in the input snapshot are valid.
 #   collections:
 #   - redhat
-#   effective_on: 2024-08-15T00:00:00Z
 #
 deny contains result if {
-	_release_restrictions_apply
 
 	components := input.snapshot.components
 	some component in components
@@ -190,10 +184,8 @@ deny contains result if {
 #     is valid and accessible.
 #   collections:
 #   - redhat
-#   effective_on: 2024-08-15T00:00:00Z
 #
 deny contains result if {
-	_release_restrictions_apply
 
 	snapshot_components := input.snapshot.components
 	component_images_digests := [component_image.digest |
